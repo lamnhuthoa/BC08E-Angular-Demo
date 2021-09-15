@@ -52,11 +52,75 @@ import { Component, OnInit } from '@angular/core';
                     </div>
                 </div>
             </div>
+            <hr/>
+            <h3>ng-content</h3>
+            <app-demo-ngContent>
+                <img class="logo" src="https://picsum.photos/50/50" alt="..." />
+                <h3 class="title">Cybersoft</h3>
+            </app-demo-ngContent>
+            <hr/>
+            <h3>[ngClass]</h3>
+            <p [ngClass]="{'mau-chu':mauChu, 'font-chu':fontChu}">lorem ipsum dolor sit amet, consectetur adip</p>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>userName</th>
+                        <th>password</th>
+                        <th>email</th>
+                        <th>avatar</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr [ngClass]="{'bg-dark text-white':index%2==0}" *ngFor="let user of arrUser; let index = index" >
+                        <td>{{user.userName}}</td>
+                        <td>{{user.password}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.avatar}}</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr/>
+            <h3>*ngStyle</h3>
+            <div [ngStyle]="{'background-image':backgroundImg}" style="height:300px">
+                lorem
+            </div>
+
+            <h3>Bài tập Tăng Giảm Font</h3>
+            <p [ngStyle]="{'font-size':fontSize+'px'}">lorem asdasgads kjasdasd kqwejwhda seqowie sfsdf</p>
+            <button class="m-2 btn btn-outline-success" (click)="tangGiamFont(true)">+</button>
+            <button class="m-2 btn btn-outline-success" (click)="tangGiamFont(false)">-</button>
+
+            <hr/>
+            <h3>Bài tập Login</h3>
+            <app-bt-directive></app-bt-directive>
+
+            <h3>Bài tập quản lý sản phẩm</h3>
+            <app-bt-qlsp></app-bt-qlsp>
+
         </div>
-    `
+
+    `,
+    styles:[`
+        .mau-chu {
+            color:red;
+        }
+        .font-chu {
+            font-size: 25px;
+        }
+    
+    `]
 })
 
 export class DirectiveComponent implements OnInit {
+    fontSize:number = 17;
+    backgroundImg:string = 'url("https://picsum.photos/200/200")';
+
+    mauChu:boolean = true;
+    fontChu:boolean = false;
+
     arrUser:User[] = [
         {userName: 'Andrew Queens Jr.', password: '12345', email: 'flyingandrew@gmail.com', avatar:'https://i.pravatar.cc?u=andrew'},
         {userName: 'Justin Bieber', password: '12345', email: 'justinbieber@gmail.com', avatar:'https://i.pravatar.cc?u=justin'},
@@ -73,6 +137,11 @@ export class DirectiveComponent implements OnInit {
 
     logout(){
         this.isLogin = false
+    }
+
+    tangGiamFont(tangGiam:boolean){
+        if(tangGiam) this.fontSize += 1;
+        else this.fontSize -= 1;
     }
 
     constructor() { }

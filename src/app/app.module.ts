@@ -7,6 +7,7 @@ import { BaiTapLayoutModule } from './Components/BaiTapLayoutComponent/BaiTapLay
 import { DataBindingModule } from './Components/DataBindingModule/DataBinding.module';
 import { DemoComponent } from './Components/Demo.components';
 import { DirectiveModule } from './Components/DirectiveModule/Directive.module';
+import { PropsModule } from './PropsModule/Props.module';
 
 @NgModule({
   declarations: [ //Nơi chứa component *Mỗi component sinh ra phải có module chứa nó
@@ -14,7 +15,7 @@ import { DirectiveModule } from './Components/DirectiveModule/Directive.module';
     DemoComponent, 
   ],
   imports: [  //Nơi import các module khác của ứng dụng
-    BrowserModule, BaiTapLayoutModule, DataBindingModule, DirectiveModule, BT4Module
+    BrowserModule, BaiTapLayoutModule, DataBindingModule, DirectiveModule, BT4Module, PropsModule
   ],
   providers: [], //Nơi khải báo các service
   bootstrap: [AppComponent] //Nơi khai báo các Component <app-root></app-root> được chạy trên index
