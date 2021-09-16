@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { ProductComponent } from './Product.component';
 
 @Component({
     selector: 'app-product-list',
@@ -8,6 +9,11 @@ import { Component, OnInit } from '@angular/core';
                 <div class="col-4" *ngFor="let user of arrUser">
                     <app-product (eventViewDetail)="viewDetailParent($event)" [userInput]="user" ></app-product>
                 </div>
+            </div>
+            <div class="form-group">
+                <p>Price</p>
+                <input class="form-control" #pass/>
+                <button class="btn btn-outline-danger" (click)="changePassword(pass.value)">Change password</button>
             </div>
             <div>
                 <h3>Thông tin chi tiết</h3>
@@ -42,26 +48,39 @@ import { Component, OnInit } from '@angular/core';
 
 export class ProductListComponent implements OnInit {
 
-    arrUser:User[] = [
-        {userName: 'Andrew Queens Jr.', password: '12345', email: 'flyingandrew@gmail.com', avatar:'https://i.pravatar.cc?u=andrew'},
-        {userName: 'Justin Bieber', password: '12345', email: 'justinbieber@gmail.com', avatar:'https://i.pravatar.cc?u=justin'},
-        {userName: 'Ryan Reynolds', password: '12345', email: 'ryanreynolds@gmail.com', avatar:'https://i.pravatar.cc?u=ryan'},
+    @ViewChildren(ProductComponent) lstTagProduct!: QueryList<ProductComponent>
+
+    arrUser: User[] = [
+        { userName: 'Andrew Queens Jr.', password: '12345', email: 'flyingandrew@gmail.com', avatar: 'https://i.pravatar.cc?u=andrew' },
+        { userName: 'Justin Bieber', password: '12345', email: 'justinbieber@gmail.com', avatar: 'https://i.pravatar.cc?u=justin' },
+        { userName: 'Ryan Reynolds', password: '12345', email: 'ryanreynolds@gmail.com', avatar: 'https://i.pravatar.cc?u=ryan' },
     ]
 
-    userDetail:User = this.arrUser[0];
+    userDetail: User = this.arrUser[0];
 
-    viewDetailParent(userDetail:User){
+    viewDetailParent(userDetail: User) {
         this.userDetail = userDetail;
     }
 
     constructor() { }
 
     ngOnInit() { }
+
+    changePassword(newPassword:string){
+        //Truy xuất đến các thẻ <app-product> => dùng vòng lặp để duyệt từng thẻ và thay đổi giá trị thuộc tính this.userInput của thẻ
+        this.lstTagProduct.forEach((tagProduct:ProductComponent,index:number) => {
+            if(tagProduct.userInput.userName === 'Justin Bieber'){
+                tagProduct.userInput.password = newPassword;    
+            }
+        })
+
+        // this.lstTagProduct.toArray()[2].viewDetail()
+    }
 }
 
-interface User{
-    avatar:string,
-    userName:string,
-    password:string,
-    email:string
+interface User {
+    avatar: string,
+    userName: string,
+    password: string,
+    email: string
 }
