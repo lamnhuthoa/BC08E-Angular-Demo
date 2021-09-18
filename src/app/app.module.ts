@@ -17,6 +17,28 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DirectiveUIModule } from './DirectiveUI/DirectiveUI.module';
 
+//Khai báo routing  
+import {Routes,RouterModule} from '@angular/router';
+import { HomeModule } from './Pages/Home.module';
+import { UserModule } from './Pages/Users/Users.module';
+import { AdminModule } from './Pages/Admin/Admin.module';
+
+let appRoutes:Routes = [
+  {path:'home', loadChildren:()=>HomeModule},
+  {path:'user', loadChildren:()=>UserModule},
+  {path:'admin', loadChildren:()=>AdminModule},
+  {path:'',loadChildren:()=>HomeModule}
+
+
+  // {path:'home', component:HomeComponent},
+  // {path:'about', component:AboutComponent},
+  // {path:'contact', component:ContactComponent},
+  // {path:'login', component:LoginComponent},
+  // {path:'register', component:RegisterComponent},
+  // {path:'', component:HomeComponent}, //Home là trang chủ của web
+  // {path:'**', redirectTo:''}, //Gõ link tùm lum, redirect về trang chủ
+]
+
 registerLocaleData(en);
 
 @NgModule({
@@ -29,7 +51,9 @@ registerLocaleData(en);
     DataBindingModule, DirectiveModule, 
     BT4Module, PropsModule, 
     FormsModule, HttpClientModule, 
-    BrowserAnimationsModule, DirectiveUIModule
+    BrowserAnimationsModule, DirectiveUIModule,
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule //Module giúp gọi API
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }], //Nơi khải báo các service
   bootstrap: [AppComponent] //Nơi khai báo các Component <app-root></app-root> được chạy trên index

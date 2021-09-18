@@ -7,17 +7,17 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzRateModule } from 'ng-zorro-antd/rate';
 import { NzTableModule } from 'ng-zorro-antd/table';
-
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 
 
 @NgModule({
     imports: [
         NzButtonModule, NzIconModule, NzTypographyModule, NzDividerModule, 
-        NzGridModule, NzLayoutModule, NzRateModule, NzTableModule
+        NzGridModule, NzLayoutModule, NzRateModule, NzTableModule, NzBreadCrumbModule
     ],
     exports: [
         NzButtonModule, NzIconModule, NzTypographyModule, NzDividerModule, 
-        NzGridModule, NzLayoutModule, NzRateModule, NzTableModule
+        NzGridModule, NzLayoutModule, NzRateModule, NzTableModule, NzBreadCrumbModule
     ],
 })
 export class AntDModule { }
