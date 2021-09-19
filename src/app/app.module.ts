@@ -13,7 +13,7 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DirectiveUIModule } from './DirectiveUI/DirectiveUI.module';
 
@@ -22,6 +22,7 @@ import {Routes,RouterModule} from '@angular/router';
 import { HomeModule } from './Pages/Home.module';
 import { UserModule } from './Pages/Users/Users.module';
 import { AdminModule } from './Pages/Admin/Admin.module';
+import { HeaderInterceptor } from './_core/Guards/Author.interceptor';
 
 let appRoutes:Routes = [
   {path:'home', loadChildren:()=>HomeModule},
@@ -55,7 +56,10 @@ registerLocaleData(en);
     RouterModule.forRoot(appRoutes),
     HttpClientModule //Module giúp gọi API
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }], //Nơi khải báo các service
+  providers: [
+    { provide: NZ_I18N, useValue: en_US },
+    { provide:HTTP_INTERCEPTORS, useClass:HeaderInterceptor, multi:true}
+  ], //Nơi khải báo các service
   bootstrap: [AppComponent] //Nơi khai báo các Component <app-root></app-root> được chạy trên index
 })
 export class AppModule { }

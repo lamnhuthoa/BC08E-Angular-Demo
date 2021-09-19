@@ -11,6 +11,9 @@ export class Film {
     hot: boolean = true;
     dangChieu: boolean = true;
     sapChieu: boolean = true;
+    constructor(){
+        
+    }
 }
 
 // {

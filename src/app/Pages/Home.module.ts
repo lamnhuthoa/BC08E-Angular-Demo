@@ -10,6 +10,7 @@ import { DetailsComponent } from './Details.component';
 
 //Định nghĩa homeRoutes
 import { RouterModule, Routes } from '@angular/router';
+import { FormComponent } from './Form.component';
 
 const homeRoutes:Routes = [
     {path:'', component:HomeTemplateComponent, children:[
@@ -18,12 +19,13 @@ const homeRoutes:Routes = [
         {path: 'contact', component:ContactComponent}, 
         {path: 'details/:id', component:DetailsComponent}, 
         {path: 'details', component:DetailsComponent}, 
+        {path: 'form', component:FormComponent},  
         
     ]}
 ]
 
 @NgModule({
-    declarations: [HomeComponent, AboutComponent, ContactComponent, HomeTemplateComponent],
+    declarations: [HomeComponent, AboutComponent, ContactComponent, HomeTemplateComponent, FormComponent],
     imports: [CommonModule, FormsModule, AntDModule, RouterModule.forChild(homeRoutes)],
     exports: [],
     // providers:[FilmService] //Khai báo service
